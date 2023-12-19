@@ -34,7 +34,7 @@ const Header = () => {
                 class="w-2/3 h-1/2 rounded-md px-3 py-2 text-sm"
                 placeholder="Enter your search item"
               />
-              <button className="bg-slate-600 h-1/2 py-2 px-3 rounded-md">
+              <button className="bg-slate-600 h-1/2 py-2 px-4 rounded-md">
                 <FaSearch />
               </button>
             </div>
