@@ -1,0 +1,10 @@
+nvm install 14.17.0
+nvm use 14.17.0
+-- khong dung duoc
+npm install --save-exact express@4.17.2 dotenv@10.0.0 body-parser@1.19.1 ejs@3.1.6
+
+npm i express dotenv body-parser
+npm i @babel/core @babel/node @babel/preset-env
+-- dich code
+npm i nodemon
+-- server tự động restart
