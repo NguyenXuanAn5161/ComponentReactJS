@@ -2,9 +2,12 @@ nvm install 14.17.0
 nvm use 14.17.0
 -- khong dung duoc
 npm install --save-exact express@4.17.2 dotenv@10.0.0 body-parser@1.19.1 ejs@3.1.6
+npm install --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env@7.15.4 nodemon@2.0.15
 
 npm i express dotenv body-parser
 npm i @babel/core @babel/node @babel/preset-env
 -- dich code
 npm i nodemon
 -- server tự động restart
+ // su dung thu vien nodemon de thuc thi babel-node, sau khi dich xong moi chay src/server.js
+    "start": "nodemon --exec babel-node src/server.js"
