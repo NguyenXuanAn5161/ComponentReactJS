@@ -6,6 +6,10 @@ npm install --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env
 
 npm i express dotenv body-parser
 npm i @babel/core @babel/node @babel/preset-env
+
+npm i bcryptjs mysql2
+npm i bluebird (giúp việc xử lý bất đồng bộ, dùng promise đơn giản)
+
 -- dich code
 npm i nodemon
 -- server tự động restart
