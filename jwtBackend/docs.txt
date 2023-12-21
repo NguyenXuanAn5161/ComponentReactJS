@@ -9,6 +9,27 @@ npm i @babel/core @babel/node @babel/preset-env
 
 npm i bcryptjs mysql2
 npm i bluebird (giúp việc xử lý bất đồng bộ, dùng promise đơn giản)
+npm i sequelize (làm việc với orm)
+npm i sequelize-cli
+
+node_modules/.bin/sequelize init
+ORM Là gì?
+
+Migration trong nodejs giống như jpa ánh xạ entity xuống database!
+link tham khảo:
+https://sequelize.org/docs/v6/other-topics/migrations/
+
+lệnh tạo các file model, ... (nhiều thứ khác)
+npx sequelize-cli model:generate --name User --attributes email:string,password:string,username:string
+
+dùng lệnh npx sequelize-cli db:migrate để chạy dòng lệnh trên đồng thời tạo table trong database
+
+sẽ có 2 table:
+table muốn tạo: users
+table mặc định sequelizemeta: quản lý version database
+
+tiếp tục: Creating the first Seed (fake data xuống database)
+npx sequelize-cli seed:generate --name demo-user
 
 -- dich code
 npm i nodemon
