@@ -31,6 +31,18 @@ table mặc định sequelizemeta: quản lý version database
 tiếp tục: Creating the first Seed (fake data xuống database)
 npx sequelize-cli seed:generate --name demo-user
 
+đối với mysql, có khái niệm số ít và số nhiều. Vì thế tên table sẽ có thêm s/es. Nhưng đối với 1 số sql khác thì không có.
+Vì vậy sẽ cố định là bỏ s/es đi.
+
+Đối với mysql, sequalize thì ta xóa s/es ở migrations và thêm thuộc tính:
+define: {
+//timestamps: true,
+freezeTableName: true
+},
+//logging: false
+
+vào config.json
+
 -- dich code
 npm i nodemon
 -- server tự động restart
