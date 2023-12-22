@@ -28,6 +28,8 @@ sẽ có 2 table:
 table muốn tạo: users
 table mặc định sequelizemeta: quản lý version database
 
+thiet lap assiciation
+
 tiếp tục: Creating the first Seed (fake data xuống database)
 npx sequelize-cli seed:generate --name demo-user
 
@@ -45,12 +47,54 @@ vào config.json
 Làm việc với orm(sequelize):
 giống java www cuối kỳ.
 
+eager loading
 
+// test relationship
+  let newUser = await db.User.findOne({
+    where: { id: 1 },
+    include: { model: db.Group, attributes: ["name", "description"] },
+    attributes: ["id", "username", "email"],
+    raw: true,
+    nest: true,
+  });
 
+  console.log(">>> check new users: ", newUser);
 
+  let roles = await db.Role.findAll({
+    include: { model: db.Group, where: { id: 1 } },
+    raw: true,
+    nest: true,
+  });
+
+  console.log(">>> check new roles: ", roles);
+
+  let users = [];
+  users = await db.User.findAll();
+  return users;
 
 -- dich code
 npm i nodemon
 -- server tự động restart
  // su dung thu vien nodemon de thuc thi babel-node, sau khi dich xong moi chay src/server.js
     "start": "nodemon --exec babel-node src/server.js"
+
+magento 2: làm về web thương mại điện tử
+
+----------------------------------------
+Design database phân quyền
+
+- Database là gì, có những loại Database nào ? So sánh điểm mạnh yếu của các loại DB.
+
+- Các chuẩn thiết kế database cho hệ thống 1NF, 2NF, 3NF là gì ?
+
+Áp dụng các chuẩn để thiết kế Database cho hệ thống Quản lý nhân sự công ty với các chức năng chính ( cần nêu rõ chỗ nào đã áp dụng theo chuẩn nào):
+
++ Login/Logout dành cho nhân viên công ty và khách hàng login để xem tình hình nhân sự công ty
+
++ Quản lý thêm sửa xóa nhân viên + Quản lý thêm sửa xóa khách hàng
+
++ Quản lý thêm sửa xóa Project cho khách hàng
+
++ Thêm người vào project theo các khoảng thời gian nhất định
+
+ + Báo cáo hàng ngày của nhân viên các công việc đã làm trong các project được assign
