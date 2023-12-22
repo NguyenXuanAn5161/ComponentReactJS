@@ -39,9 +39,15 @@ define: {
 //timestamps: true,
 freezeTableName: true
 },
-//logging: false
-
+//logging: false // khong in ra cau lenh sql mac dinh cua orm
 vào config.json
+
+Làm việc với orm(sequelize):
+giống java www cuối kỳ.
+
+
+
+
 
 -- dich code
 npm i nodemon
