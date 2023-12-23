@@ -1,0 +1,10 @@
+npm i sass
+npm i react-router-dom@5.3.4
+npm i bootstrap@5.3.2
+
+Để tránh tình trạng load lại trang web dùng thẻ link của react-router-dom
+
+Đồng thời để sáng lên thẻ đã chọn có thể dùng NavLink của react-router-dom. Vì mỗi lần chọn sẽ tự động thêm class="active" và đã được định nghĩa bên css.
+
+Và thêm attribute axact để chỉ rõ rằng chính xác là "/" thì mới ok, còn nếu "/user" thì không ok, và thẻ được chọn thì mới sáng lên thôi (thêm cả bên router).
+
