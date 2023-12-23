@@ -1,6 +1,7 @@
 npm i sass
 npm i react-router-dom@5.3.4
 npm i bootstrap@5.3.2
+npm i axios@1.6.2
 
 Để tránh tình trạng load lại trang web dùng thẻ link của react-router-dom
 
@@ -17,3 +18,11 @@ test về chiều rộng:
 768 < < 1300
 500 < < 768
 < 500
+
+Tùy thuộc vào yêu cầu dự án mà chúng ta có thể code backend + frontend chung 1 project (tùy framework mà nó sẽ hổ trợ)
+
+Tuy nhiên, sẽ có 1 số lý do mà nó được tách rời hoặc gộp chung như sau:
++ Đối với các dự án không quan trọng phía backend (ví dụ như app đọc báo, hacker hack được frontend thì dĩ nhiên sẽ lấy được cả backend (nếu gộp)), nhưng nếu là đọc báo mà hack được cả backend thì cũng không dùng để làm gì?, nó không quá quan trọng, không có lưu những thông tin nhạy cảm của người dùng!
++ Đối với các dự án mà dự liệu phía backend, lưu trữ dữ liệu người dùng là cực kỳ quan trọng thì cần phải tách ra (ví dụ: ngân hàng, chứng khoán). Khi đấy app sẽ được chạy trên 2 luồng mạng khác nhau (nó đã được ngăn chặn từ đầu). Và điều đó dẫn đến việc dù có hack được frontend thì cũng không ảnh hưởng gì đến backend.
+Ngoài ra, có 1 số ưu điểm khác như:
++ Khi ứng dụng với lượng người dùng lớn > 1 triệu người dùng thì việc mở rộng backend là vô cùng cần thiết. Nếu tách riêng thì việc mở rộng sẽ đơn giản (mô hình microservice). Và frontend sẽ không cần phải đụng chạm đến.
