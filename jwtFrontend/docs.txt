@@ -8,3 +8,12 @@ npm i bootstrap@5.3.2
 
 Và thêm attribute axact để chỉ rõ rằng chính xác là "/" thì mới ok, còn nếu "/user" thì không ok, và thẻ được chọn thì mới sáng lên thôi (thêm cả bên router).
 
+bootstrap screen size (thay đổi theo màn hình).
+
+test về chiều rộng:
+5 lớp:
+>1920 => large
+1300 < < 1920
+768 < < 1300
+500 < < 768
+< 500

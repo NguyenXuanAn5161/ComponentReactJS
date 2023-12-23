@@ -1,13 +1,12 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "./App.scss";
 import Login from "./components/Login/Login";
-import Nav from "./components/Navigation/Nav";
 
 function App() {
   return (
     <Router>
       <div className="app-container">
-        <Nav />
+        {/* <Nav /> */}
         <Switch>
           <Route path="/news">news</Route>
           <Route path="/about">about</Route>
