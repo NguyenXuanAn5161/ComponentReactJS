@@ -19,6 +19,16 @@ test về chiều rộng:
 500 < < 768
 < 500
 
+Khi làm thiên về frontend chúng ta sẽ gặp phải lỗi kinh điển, đó là CORS (nguồn tài nguyễn share giữa các website với nhau).
+
+hạn chế việc bị ăn trộm cookie, sử dụng mục địch xấu!
+
+Link url là public, tuy nhiên, chỉ những trang web được phép thì gọi tới mới có tác dụng, sử dụng được, truy cập được!
+-> Sử dụng middleware bảo mật phía nodejs
+
+
+
+
 Tùy thuộc vào yêu cầu dự án mà chúng ta có thể code backend + frontend chung 1 project (tùy framework mà nó sẽ hổ trợ)
 
 Tuy nhiên, sẽ có 1 số lý do mà nó được tách rời hoặc gộp chung như sau:

@@ -12,7 +12,7 @@ const Register = (props) => {
 
   useEffect(() => {
     axios.get("http://localhost:8080/api/test-api").then((data) => {
-      console.log(">>> check data: ", JSON.stringify(data));
+      console.log(">>> check data: ", data);
     });
   }, []);
 
