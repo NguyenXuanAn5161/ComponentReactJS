@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./App.scss";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
@@ -24,6 +26,18 @@ function App() {
           <Route path="*">404 not found</Route>
         </Switch>
       </div>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </Router>
   );
 }

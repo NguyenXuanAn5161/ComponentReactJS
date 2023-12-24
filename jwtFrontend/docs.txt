@@ -2,6 +2,7 @@ npm i sass
 npm i react-router-dom@5.3.4
 npm i bootstrap@5.3.2
 npm i axios@1.6.2
+npm i react-toastify@9.1.3 - để thông báo lỗi (sử dụng global thì ném vào app.js)
 
 Để tránh tình trạng load lại trang web dùng thẻ link của react-router-dom
 
@@ -10,6 +11,8 @@ npm i axios@1.6.2
 Và thêm attribute axact để chỉ rõ rằng chính xác là "/" thì mới ok, còn nếu "/user" thì không ok, và thẻ được chọn thì mới sáng lên thôi (thêm cả bên router).
 
 bootstrap screen size (thay đổi theo màn hình).
+
+
 
 test về chiều rộng:
 5 lớp:
@@ -26,6 +29,7 @@ hạn chế việc bị ăn trộm cookie, sử dụng mục địch xấu!
 Link url là public, tuy nhiên, chỉ những trang web được phép thì gọi tới mới có tác dụng, sử dụng được, truy cập được!
 -> Sử dụng middleware bảo mật phía nodejs
 
+link: https://stackoverflow.com/questions/18310394/no-access-control-allow-origin-node-apache-port-issue/18311469#18311469
 
 
 
@@ -36,3 +40,7 @@ Tuy nhiên, sẽ có 1 số lý do mà nó được tách rời hoặc gộp chu
 + Đối với các dự án mà dự liệu phía backend, lưu trữ dữ liệu người dùng là cực kỳ quan trọng thì cần phải tách ra (ví dụ: ngân hàng, chứng khoán). Khi đấy app sẽ được chạy trên 2 luồng mạng khác nhau (nó đã được ngăn chặn từ đầu). Và điều đó dẫn đến việc dù có hack được frontend thì cũng không ảnh hưởng gì đến backend.
 Ngoài ra, có 1 số ưu điểm khác như:
 + Khi ứng dụng với lượng người dùng lớn > 1 triệu người dùng thì việc mở rộng backend là vô cùng cần thiết. Nếu tách riêng thì việc mở rộng sẽ đơn giản (mô hình microservice). Và frontend sẽ không cần phải đụng chạm đến.
+
+Kiến thức về react:
+nếu ô input đặt là value={...} thì lúc này nhập gì cũng sẽ không có, vì giá trị của nó đã được react kiểm soát.
+-> sử dụng onChange={(event)=>set...(event.target.value)}
