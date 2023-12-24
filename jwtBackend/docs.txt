@@ -98,3 +98,6 @@ Design database phân quyền
 + Thêm người vào project theo các khoảng thời gian nhất định
 
  + Báo cáo hàng ngày của nhân viên các công việc đã làm trong các project được assign
+
+1 số lỗi vặt có thể gặp:
+nếu dùng xampp để start mysql thì nếu lỗi dừng đột ngột, copy data, xóa schema, mysql, test, admin, chỉ chừa csdl, và ibdata1, sau đó vào backup copy tất cả trừ ibdata1 -> ok!
