@@ -45,3 +45,7 @@ Ngoài ra, có 1 số ưu điểm khác như:
 Kiến thức về react:
 nếu ô input đặt là value={...} thì lúc này nhập gì cũng sẽ không có, vì giá trị của nó đã được react kiểm soát.
 -> sử dụng onChange={(event)=>set...(event.target.value)}
+
+localStorage: lưu trữ ở local, mãi, không mất - rũi ro dễ lộ thông tin (MB).
+sessionStorage: đóng tab, đóng trình duyệt nó sẽ xóa (hết phiên làm việc nó sẽ xóa).
+Cockie: con lai giữa local và session - có ngày hết hạn(dung lượng lưu trữ nhỏ hơn)

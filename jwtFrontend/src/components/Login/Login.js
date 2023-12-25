@@ -14,26 +14,27 @@ const Login = (props) => {
   const [objCheckInput, setObjCheckInput] = useState(defaultValidInput);
 
   const handleLogin = async () => {
-    isValidInputs();
+    let check = isValidInputs();
 
-    let response = await loginUser(valueLogin, password);
+    if (check === true) {
+      let response = await loginUser(valueLogin, password);
 
-    if (response && response.data && response.data.EC === 0) {
-      // success
-      let data = {
-        isAuthenticated: true,
-        token: "fake token",
-      };
-      sessionStorage.setItem("account", JSON.stringify(data));
-      history.push("/users");
+      if (response && response.data && response.data.EC === 0) {
+        // success
+        let data = {
+          isAuthenticated: true,
+          token: "fake token",
+        };
+        sessionStorage.setItem("account", JSON.stringify(data));
+        history.push("/users");
+        window.location.reload();
+      }
+
+      if (response && response.data && response.data.EC !== 0) {
+        // error
+        toast.error(response.data.EM);
+      }
     }
-
-    if (response && response.data && response.data.EC !== 0) {
-      // error
-      toast.error(response.data.EM);
-    }
-
-    console.log(">>> check response data: ", response.data);
   };
 
   const isValidInputs = () => {
@@ -56,6 +57,12 @@ const Login = (props) => {
     }
 
     return true;
+  };
+
+  const handlePressEnter = (event) => {
+    if (event.keyCode === 13 && event.code === "Enter") {
+      handleLogin();
+    }
   };
 
   let history = useHistory();
@@ -101,6 +108,7 @@ const Login = (props) => {
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
+              onKeyDown={(event) => handlePressEnter(event)}
             />
             <button className="btn btn-primary" onClick={() => handleLogin()}>
               Login
