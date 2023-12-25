@@ -16,7 +16,7 @@ const Register = (props) => {
     isValidPassword: true,
     isValidConfirmPassword: true,
   };
-  const [objCheckInput, setObjCheckValid] = useState(defaultValidInput);
+  const [objCheckInput, setObjCheckInput] = useState(defaultValidInput);
 
   let history = useHistory();
 
@@ -40,30 +40,30 @@ const Register = (props) => {
   };
 
   const isValidInputs = () => {
-    setObjCheckValid(defaultValidInput);
+    setObjCheckInput(defaultValidInput);
 
     if (!email) {
       toast.error("Email is required!");
-      setObjCheckValid({ ...defaultValidInput, isValidEmailL: false });
+      setObjCheckInput({ ...defaultValidInput, isValidEmailL: false });
       return false;
     }
 
     let regx = /\S+@\S+\.\S+/;
     if (!regx.test(email)) {
       toast.error("Please enter a valid email address!");
-      setObjCheckValid({ ...defaultValidInput, isValidEmailL: false });
+      setObjCheckInput({ ...defaultValidInput, isValidEmailL: false });
       return false;
     }
 
     if (!phone) {
       toast.error("Phone is required!");
-      setObjCheckValid({ ...defaultValidInput, isValidPhone: false });
+      setObjCheckInput({ ...defaultValidInput, isValidPhone: false });
       return false;
     }
 
     if (!password) {
       toast.error("Password is required!");
-      setObjCheckValid({
+      setObjCheckInput({
         ...defaultValidInput,
         isValidPassword: false,
         isValidConfirmPassword: false,
@@ -73,7 +73,7 @@ const Register = (props) => {
 
     if (password && password.length < 4) {
       toast.error("Your password must have more than 3 letters!");
-      setObjCheckValid({
+      setObjCheckInput({
         ...defaultValidInput,
         isValidPassword: false,
         isValidConfirmPassword: false,
@@ -83,7 +83,7 @@ const Register = (props) => {
 
     if (password != confirmPassword) {
       toast.error("Your password is not the same!");
-      setObjCheckValid({
+      setObjCheckInput({
         ...defaultValidInput,
         isValidPassword: false,
         isValidConfirmPassword: false,
