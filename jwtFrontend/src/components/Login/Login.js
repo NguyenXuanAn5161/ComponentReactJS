@@ -14,12 +14,26 @@ const Login = (props) => {
   const [objCheckInput, setObjCheckInput] = useState(defaultValidInput);
 
   const handleLogin = async () => {
-    let check = isValidInputs();
-    if (check === true) {
-      toast.success("Ok!");
+    isValidInputs();
+
+    let response = await loginUser(valueLogin, password);
+
+    if (response && response.data && response.data.EC === 0) {
+      // success
+      let data = {
+        isAuthenticated: true,
+        token: "fake token",
+      };
+      sessionStorage.setItem("account", JSON.stringify(data));
+      history.push("/users");
     }
 
-    await loginUser(valueLogin, password);
+    if (response && response.data && response.data.EC !== 0) {
+      // error
+      toast.error(response.data.EM);
+    }
+
+    console.log(">>> check response data: ", response.data);
   };
 
   const isValidInputs = () => {
