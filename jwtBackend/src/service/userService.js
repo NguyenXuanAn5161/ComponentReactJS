@@ -29,8 +29,8 @@ const getUserList = async () => {
     where: { id: 1 },
     include: { model: db.Group, attributes: ["name", "description"] },
     attributes: ["id", "username", "email"],
-    raw: true,
-    nest: true,
+    raw: true, // trả về javascript plain object, không phải là đối tượng sequelize.
+    nest: true, // lồng dữ liệu liên kết trong đối tượng mẹ
   });
 
   console.log(">>> check new users: ", newUser);

@@ -54,8 +54,8 @@ eager loading
     where: { id: 1 },
     include: { model: db.Group, attributes: ["name", "description"] },
     attributes: ["id", "username", "email"],
-    raw: true,
-    nest: true,
+    raw: true, // trả về javascript plain object, không phải là đối tượng sequelize.
+    nest: true, // lồng dữ liệu liên kết trong đối tượng mẹ
   });
 
   console.log(">>> check new users: ", newUser);
@@ -71,6 +71,16 @@ eager loading
   let users = [];
   users = await db.User.findAll();
   return users;
+
+// các trường trong exclude sẽ không được bao gồm trong kết quả trả về.
+let newUser = await db.User.findOne({
+  where: { id: 1 },
+  include: { model: db.Group, attributes: ["name", "description"] },
+  attributes: { exclude: ["age", "createdAt"] },
+  raw: true,
+  nest: true,
+});
+
 
 -- dich code
 npm i nodemon
