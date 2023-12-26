@@ -5,7 +5,6 @@ import "./Nav.scss";
 const Nav = (props) => {
   const [isShow, setIsShow] = useState(true);
   let location = useLocation();
-  console.log(">>> check react router dom: ", location);
 
   useEffect(() => {
     if (location.pathname === "/login") {
