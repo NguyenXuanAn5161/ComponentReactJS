@@ -5,6 +5,7 @@ npm i axios@1.6.2
 npm i react-toastify@9.1.3 - để thông báo lỗi (sử dụng global thì ném vào app.js)
 npm i lodash@4.17.21
 npm i react-paginate@8.2.0
+npm i react-bootstrap@2.9.2
 
 Để tránh tình trạng load lại trang web dùng thẻ link của react-router-dom
 
