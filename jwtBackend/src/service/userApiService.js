@@ -6,6 +6,7 @@ const getAllUser = async () => {
       include: { model: db.Group, attributes: ["name", "description"] },
       attributes: ["id", "email", "username", "address", "sex", "phone"],
     });
+
     if (users) {
       return {
         EM: "get data success",
@@ -19,6 +20,37 @@ const getAllUser = async () => {
         DT: [],
       };
     }
+  } catch (e) {
+    console.log(e);
+    return {
+      EM: "Something wrongs with service",
+      EC: 1,
+      DT: [],
+    };
+  }
+};
+
+const getUserWithPagination = async (page, limit) => {
+  try {
+    let offset = (page - 1) * limit;
+    const { count, rows } = await db.User.findAndCountAll({
+      offset: offset,
+      limit: limit,
+      // sort: ''
+    });
+
+    let totalPages = Math.ceil(count / limit);
+    let data = {
+      totalRows: count,
+      totalPages: totalPages,
+      users: rows,
+    };
+
+    return {
+      EM: "fetch ok",
+      EC: 0,
+      DT: data,
+    };
   } catch (e) {
     console.log(e);
     return {
@@ -68,4 +100,5 @@ module.exports = {
   createNewUser,
   updateUser,
   deleteUser,
+  getUserWithPagination,
 };
