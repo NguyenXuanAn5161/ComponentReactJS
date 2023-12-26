@@ -3,6 +3,7 @@ import ReactPaginate from "react-paginate";
 import { toast } from "react-toastify";
 import { deleteUser, fetchAllUser } from "../../services/userService";
 import ModalDelete from "./ModalDelete";
+import ModalUser from "./ModalUser";
 import "./Users.scss";
 
 const Users = (props) => {
@@ -148,6 +149,7 @@ const Users = (props) => {
         confirmDeleteUser={confirmDeleteUser}
         dataModal={dataModal}
       />
+      <ModalUser title="Create new user" />
     </>
   );
 };

@@ -28,4 +28,8 @@ const deleteUser = (user) => {
   });
 };
 
-export { deleteUser, fetchAllUser, loginUser, registerNewUser };
+const fetchGroup = (user) => {
+  return axios.get(`http://localhost:8080/api/v1/group/read`);
+};
+
+export { deleteUser, fetchAllUser, fetchGroup, loginUser, registerNewUser };
