@@ -23,6 +23,23 @@ test về chiều rộng:
 500 < < 768
 < 500
 
+basic pagination
+count: => đếm tổng số bản ghi
+
+total(size): số lượng lấy ra(limit)
+
+page ? (offset) - quan tâm xem đang ở trang nào?
+ví dụ: 30 rows, 1 page 5 rows => total 6 pages
+1 -> 1 ... 5
+2 -> 6 ... 10
+...
+6 -> 26 ... 30
+
+server -> tính ofset
+
+page 2: bắt đầu từ row thứ 6(giống skip - xóa 5 kết quả trước)
+sql: select * from users limit 5 ofset 5
+
 Khi làm thiên về frontend chúng ta sẽ gặp phải lỗi kinh điển, đó là CORS (nguồn tài nguyễn share giữa các website với nhau).
 
 hạn chế việc bị ăn trộm cookie, sử dụng mục địch xấu!
@@ -49,3 +66,5 @@ nếu ô input đặt là value={...} thì lúc này nhập gì cũng sẽ khôn
 localStorage: lưu trữ ở local, mãi, không mất - rũi ro dễ lộ thông tin (MB).
 sessionStorage: đóng tab, đóng trình duyệt nó sẽ xóa (hết phiên làm việc nó sẽ xóa).
 Cockie: con lai giữa local và session - có ngày hết hạn(dung lượng lưu trữ nhỏ hơn)
+
+keyword: react-table
