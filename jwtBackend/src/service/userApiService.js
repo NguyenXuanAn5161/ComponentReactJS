@@ -1,4 +1,9 @@
 import db from "../models/index";
+import {
+  checkEmailExist,
+  checkPhoneExist,
+  hashUserPassword,
+} from "../service/loginRegisterService";
 
 const getAllUser = async () => {
   try {
@@ -34,8 +39,9 @@ const getUserWithPagination = async (page, limit) => {
   try {
     let offset = (page - 1) * limit;
     const { count, rows } = await db.User.findAndCountAll({
-      include: { model: db.Group, attributes: ["name", "description"] },
+      include: { model: db.Group, attributes: ["name", "description", "id"] },
       attributes: ["id", "email", "username", "address", "sex", "phone"],
+      order: [["id", "DESC"]],
       offset: offset,
       limit: limit,
       // sort: ''
@@ -63,16 +69,52 @@ const getUserWithPagination = async (page, limit) => {
   }
 };
 
-const createNewUser = async (data) => {
+const createNewUser = async (rawUserData) => {
   try {
-    await db.User.create(data);
+    // check email/phone are exist
+    let isEmailExist = await checkEmailExist(rawUserData.email);
+    if (isEmailExist === true) {
+      return {
+        EM: "The email is already exist!",
+        EC: 1,
+        DT: "email",
+      };
+    }
+
+    let isPhoneExist = await checkPhoneExist(rawUserData.phone);
+    if (isPhoneExist === true) {
+      return {
+        EM: "The phone is already exist!",
+        EC: 1,
+        DT: "phone",
+      };
+    }
+
+    if (rawUserData.password && rawUserData.password.length < 4) {
+      return {
+        EM: "Your password must have more than 3 letters", // error message
+        EC: "1", // error code
+        DT: "password", //data
+      };
+    }
+
+    // hash user password
+    let hashPassword = hashUserPassword(rawUserData.password);
+
+    // create new user
+    await db.User.create({ ...rawUserData, password: hashPassword });
     return {
-      EM: "create ok",
+      EM: "A user is created successfully!",
       EC: 0,
       DT: [],
     };
   } catch (e) {
     console.log(e);
+    return {
+      EM: "Something wrongs in service...",
+      EC: -2,
+      DT: [],
+    };
   }
 };
 
