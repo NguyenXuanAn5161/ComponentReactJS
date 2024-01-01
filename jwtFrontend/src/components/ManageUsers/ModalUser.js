@@ -11,6 +11,8 @@ import { createNewUser, fetchGroup } from "../../services/userService";
 const ModalUser = (props) => {
   const [userGroup, setUserGroup] = useState([]);
 
+  const { action, dataModalUser } = props; // js object destructuring
+
   const defaultUserData = {
     email: "",
     phone: "",
@@ -37,6 +39,23 @@ const ModalUser = (props) => {
   useEffect(() => {
     getGroups();
   }, []);
+
+  useEffect(() => {
+    if (action === "UPDATE") {
+      setUserData({
+        ...dataModalUser,
+        group: dataModalUser.Group ? dataModalUser.Group.id : "",
+      });
+    }
+  }, [dataModalUser]);
+
+  useEffect(() => {
+    if (action === "CREATE") {
+      if (userGroup && userGroup.length > 0) {
+        setUserData({ ...userData, group: userGroup[0].id });
+      }
+    }
+  }, [action]);
 
   const getGroups = async () => {
     let response = await fetchGroup();
@@ -88,22 +107,34 @@ const ModalUser = (props) => {
       if (response.data && response.data.EC === 0) {
         props.onHide();
         setUserData({ ...defaultUserData, group: userGroup[0].id });
-      } else {
-        toast.error("error phai lay tu server");
+        toast.success(response.data.EM);
+      }
+
+      if (response.data && response.data.EC !== 0) {
+        toast.error(response.data.EM);
+        let _objCheckInput = _.cloneDeep(defaultValidInput);
+        _objCheckInput[response.data.DT] = false;
+        setObjCheckInput(_objCheckInput);
       }
     }
   };
 
-  const hanldeOnHide = () => {
+  const handleCloseModalUser = () => {
     props.onHide();
     setUserData({ ...defaultUserData, group: userGroup[0].id });
+    setObjCheckInput(defaultValidInput);
+    // if (action === "CREATE") {
+    //   setUserData({ ...defaultUserData, group: userGroup[0].id });
+    // }
   };
 
   return (
     <>
-      <Modal show={props.show} onHide={() => hanldeOnHide()} size="lg">
+      <Modal show={props.show} onHide={() => handleCloseModalUser()} size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>{props.title}</Modal.Title>
+          <Modal.Title>
+            {action === "CREATE" ? "Create new user" : "Edit a user"}
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className="grid-example">
           <Container>
@@ -113,6 +144,7 @@ const ModalUser = (props) => {
                   Email address(<span style={{ color: "red" }}>*</span>)
                 </label>
                 <input
+                  disabled={action === "CREATE" ? false : true}
                   onChange={(event) =>
                     handleOnChangeInput(event.target.value, "email")
                   }
@@ -131,6 +163,7 @@ const ModalUser = (props) => {
                   Phone number(<span style={{ color: "red" }}>*</span>)
                 </label>
                 <input
+                  disabled={action === "CREATE" ? false : true}
                   value={userData.phone}
                   onChange={(event) =>
                     handleOnChangeInput(event.target.value, "phone")
@@ -163,22 +196,26 @@ const ModalUser = (props) => {
                 />
               </Col>
               <Col className="col-12 col-sm-6 form-group">
-                <label>
-                  Password(<span style={{ color: "red" }}>*</span>)
-                </label>
-                <input
-                  value={userData.password}
-                  onChange={(event) =>
-                    handleOnChangeInput(event.target.value, "password")
-                  }
-                  type="password"
-                  className={
-                    objCheckInput.password
-                      ? "form-control"
-                      : "form-control is-invalid"
-                  }
-                  placeholder="Password"
-                />
+                {action === "CREATE" && (
+                  <>
+                    <label>
+                      Password(<span style={{ color: "red" }}>*</span>)
+                    </label>
+                    <input
+                      value={userData.password}
+                      onChange={(event) =>
+                        handleOnChangeInput(event.target.value, "password")
+                      }
+                      type="password"
+                      className={
+                        objCheckInput.password
+                          ? "form-control"
+                          : "form-control is-invalid"
+                      }
+                      placeholder="Password"
+                    />
+                  </>
+                )}
               </Col>
             </Row>
             <Row>
@@ -203,6 +240,7 @@ const ModalUser = (props) => {
               <Col className="col-12 col-sm-6 form-group">
                 <label>Gender</label>
                 <select
+                  value={userData.sex}
                   className="form-select"
                   onChange={(event) =>
                     handleOnChangeInput(event.target.value, "sex")
@@ -218,6 +256,7 @@ const ModalUser = (props) => {
                   Group(<span style={{ color: "red" }}>*</span>)
                 </label>
                 <select
+                  value={userData.group}
                   className={
                     objCheckInput.group
                       ? "form-select"
@@ -241,11 +280,11 @@ const ModalUser = (props) => {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => hanldeOnHide()}>
+          <Button variant="secondary" onClick={() => handleCloseModalUser()}>
             Close
           </Button>
           <Button variant="primary" onClick={() => handleConfirmUser()}>
-            Save
+            {action === "CREATE" ? "Save" : "Update"}
           </Button>
         </Modal.Footer>
       </Modal>
